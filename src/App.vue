@@ -2,7 +2,7 @@
 
 import { requestNotificationPermission } from './service/service';
 import { showNotification } from './service/notification';
-import { fetchOffer, fetchOffers } from './loaders/fetch-offers';
+import { fetchDetailedOffers, fetchOffer, fetchOffers } from './loaders/fetch-offers';
 import EventsCard from './components/EventsCard.vue';
 import { ref } from 'vue';
 
@@ -10,7 +10,7 @@ const interval = 3* 60 * 1000;
 
 const events  = ref([]);
 
-fetchOffers().then((data) => {
+fetchDetailedOffers().then((data) => {
   console.log(data);
   events.value = data;
 });

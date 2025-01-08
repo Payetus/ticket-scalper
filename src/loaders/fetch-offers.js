@@ -22,9 +22,20 @@ export const fetchOffers = async () => {
     return response.data.data;
 }
 
+export const fetchDetailedOffers = async () => {
+    const offers = await fetchOffers();
+    const promises = offers.map(offer => fetchOffer(offer.id));
+    const detailedOffers = await Promise.all(promises);
+    detailedOffers.forEach((offer, index) => {
+        offers[index].quantity = offer.quantity;
+        offers[index].release = offer.name;
+        offers[index].price = offer.price;
+    })
+    return offers;
+}
 export const fetchOffer = async (id) => {
     try {
-      const res = await axios.get(`https://offer.xceed.me/v1/events/{id}/offers?lang=en`);
+      const res = await axios.get(`https://offer.xceed.me/v1/events/${id}/offers?lang=en`);
       const offers = res.data.data.ticket.filter(offer => !offer.salesStatus.isSoldOut);
       offers.forEach(offer => {
         console.log(`Offer: ${offer.name}, Quantity Left: ${offer.quantity}`);
