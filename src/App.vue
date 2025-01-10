@@ -6,7 +6,7 @@ import { fetchDetailedOffers, fetchOffers, fetchEvents } from './loaders/fetch-o
 import EventsCard from './components/EventsCard.vue';
 import { ref } from 'vue';
 
-const interval = 3* 60 * 1000;
+const interval = 30* 60 * 1000;
 
 const events  = ref([]);
 
@@ -25,13 +25,6 @@ setInterval(() => {
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
+    <img src="./assets/logo.png" width="150" alt="">
   <EventsCard :events="events" />
 </template>

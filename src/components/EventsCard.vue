@@ -5,7 +5,6 @@ const { events } = defineProps({
 </script>
 
 <template>
-    <h1>Events</h1>
     <div class="events">
         <div 
             v-for="event in events" 
