@@ -12,11 +12,17 @@ const { events } = defineProps({
             :key="event.id" 
             :class="['event-card', { 'low-quantity': event.quantity < 70 }]">
             <h2>Event: {{ event.name }}</h2>
-            <p>Location: {{ event.venue.name }}</p>
-            <p>Time: {{ new Date(event.startingTime * 1000).toLocaleString() }}</p>
-            <p>Price: {{ event.price.amount }} {{ event.price.currency }}</p>
-            <p>Release: {{ event.release }}</p>
-            <p>Quantity Left: {{ event.quantity }}</p>
+            <span> Location: {{ event.venue.name }}</span>
+            <span> Time: {{ new Date(event.startingTime * 1000).toLocaleString() }}</span>
+            <div >
+                <div v-for="offer in event.offers" :key="offer.release" class="release">
+                    <ul>
+                        <li>Release: {{ offer.release }} -> {{ offer.price && offer.price.amount }}€</li>
+                        <li>Qty: {{ offer.quantity }}</li>
+                    </ul>
+                </div>
+
+            </div>
         </div>
     </div>
 </template>
@@ -39,5 +45,10 @@ const { events } = defineProps({
 
 .low-quantity {
     background-color: lightcoral;
+}
+
+.release {
+    background: lightslategray;
+    color: black;
 }
 </style>

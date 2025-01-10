@@ -2,7 +2,7 @@
 
 import { requestNotificationPermission } from './service/service';
 import { showNotification } from './service/notification';
-import { fetchDetailedOffers, fetchOffer, fetchOffers } from './loaders/fetch-offers';
+import { fetchDetailedOffers, fetchOffers, fetchEvents } from './loaders/fetch-offers';
 import EventsCard from './components/EventsCard.vue';
 import { ref } from 'vue';
 
@@ -18,7 +18,7 @@ fetchDetailedOffers().then((data) => {
 console.log( new Date().toLocaleString(), interval);
 requestNotificationPermission();
 setInterval(() => {
-  fetchOffer('047fe0ce-b95e-11ef-87dd-0242ac110006').then((offer) => {
+  fetchOffers('047fe0ce-b95e-11ef-87dd-0242ac110006').then((offer) => {
     showNotification('offer', `Offer: ${offer.name}, Quantity Left: ${offer.quantity}`);
   });
 }, interval)
